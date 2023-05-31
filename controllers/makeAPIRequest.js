@@ -10,12 +10,12 @@ const openai = new OpenAIApi(configuration);
 module.exports = async(req,res) => {
 
     try {
-        const prompt = req.body.prompt;
-        const model = req.body.model;
+        const prompt = req.body["input-field"];
+        const model = req.body["model-selection"];
     
         const response = await openai.createCompletion({ "model": model, "prompt": prompt, "max_tokens": 2048});
         const answer = response.data.choices[0].text.trim();
-        
+                
         res.setHeader('Content-Type', 'application/json');
         res.statusCode = 200;
         res.end(JSON.stringify({ data: answer }));

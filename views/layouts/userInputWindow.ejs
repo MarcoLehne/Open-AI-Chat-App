@@ -1,12 +1,12 @@
 <form id="requestForm" method="POST">
-    <textarea id="prompt" name="prompt" placeholder="Type your prompt here.."></textarea>
-    <label for="prompt"></label>
-    <select name="model">
+    <textarea id="input-field" name="input-field" placeholder="Type your prompt here.."></textarea>
+    <label for="input-field"></label>
+    <select id="model-selection" name="model-selection">
         <option value="text-davinci-003">Davinci</option>
         <option value="text-babbage-003">Babbage</option>
     </select>
-    <button type="submit">Send</button>
+    <button id="submit-btn" type="submit">Send</button>
 
     <!-- if the name of the form id or textarea id changes, it needs to be changed in the referenced js file down below as well -->
-    <script src="/js/formSubmissionListener.js"></script>
+    <script type="module" src="/js/formSubmissionListener.js"></script>
 </form>

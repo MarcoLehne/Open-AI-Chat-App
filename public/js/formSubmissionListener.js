@@ -1,29 +1,28 @@
+import { updateChatWindow } from "./updateChatWindow.js";
+import { disableUIBeforeCompletedAPIRequest } from "./disableUIBeforeCompletedAPIRequest.js";
+import { enableUIAfterCompletedAPIRequest } from "./enableUIAfterCompletedAPIRequest.js";
+import { fetchFromAPI } from "./fetchFromAPI.js";
+
 const formId = 'requestForm';
-const inputFieldId = 'prompt';
-const APIEndpoint = '/makeAPIRequest';
 
-const submitForm = async (formId, inputFieldId, APIEndpoint) => {
+const submitForm = async (formId) => {
   const form = document.getElementById(formId);
-  const inputField = document.getElementById(inputFieldId);
-
+  
   form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent form from submitting
 
+    event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
-
-    const response = await fetch(APIEndpoint, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(formData),
-    });
     
-    const data = await response.json();
+    disableUIBeforeCompletedAPIRequest();
 
-    // // Update Template B with the response
-    // displayResponse(data);
+    updateChatWindow(formData["input-field"]);
 
-    inputField.value = '';
+    const response = await fetchFromAPI(formData);
+    
+    updateChatWindow(response.data);
+    
+    enableUIAfterCompletedAPIRequest();
   });
 };
 
-submitForm(formId, inputFieldId, APIEndpoint);
+submitForm(formId);

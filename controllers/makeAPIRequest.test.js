@@ -14,7 +14,7 @@ describe('openaiFunction', () => {
         expect(response).toMatch(/.+/i);
     });
 
-    test('should throw "The model .. does not exist" when requested with inexisting model', async() => {
+    test('should throw "The model .. does not exist" error when requested with inexisting model', async() => {
 
         const req = {};
         req.prompt = "Tell me a joke";
