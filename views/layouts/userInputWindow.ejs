@@ -1,1 +1,12 @@
-<h1>I am the user input window</h1>
+<form id="requestForm" method="POST">
+    <textarea id="prompt" name="prompt" placeholder="Type your prompt here.."></textarea>
+    <label for="prompt"></label>
+    <select name="model">
+        <option value="text-davinci-003">Davinci</option>
+        <option value="text-babbage-003">Babbage</option>
+    </select>
+    <button type="submit">Send</button>
+
+    <!-- if the name of the form id or textarea id changes, it needs to be changed in the referenced js file down below as well -->
+    <script src="/js/formSubmissionListener.js"></script>
+</form>

@@ -1,3 +1,4 @@
+const express = require('express');
 require('dotenv').config();
 const { Configuration, OpenAIApi } = require('openai');
 const configuration = new Configuration({
@@ -7,11 +8,20 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 module.exports = async(req,res) => {
-    
-    const prompt = "Tell me a joke";
-    const model = "text-davinci-003";
 
-    const response = await openai.createCompletion({ "model": model, "prompt": prompt, "max_tokens": 2048,});
-    console.log(response.data.choices[0].text.trim())
-    res.json({ data: response.data.choices[0].text.trim()} );
+    try {
+        const prompt = req.body.prompt;
+        const model = req.body.model;
+    
+        const response = await openai.createCompletion({ "model": model, "prompt": prompt, "max_tokens": 2048});
+        const answer = response.data.choices[0].text.trim();
+        
+        res.setHeader('Content-Type', 'application/json');
+        res.statusCode = 200;
+        res.end(JSON.stringify({ data: answer }));
+    }
+    catch (error) {
+        res.statusCode = 500;
+        res.end(JSON.stringify({ error: 'Internal Server Error' }));
+    }
 }
