@@ -11,6 +11,7 @@ const submitForm = async (formId) => {
   form.addEventListener('submit', async (event) => {
 
     event.preventDefault();
+    
     const formData = Object.fromEntries(new FormData(event.target));
     
     disableUIBeforeCompletedAPIRequest();
