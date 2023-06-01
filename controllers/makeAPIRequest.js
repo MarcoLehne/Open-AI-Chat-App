@@ -21,6 +21,7 @@ module.exports = async(req,res) => {
         res.end(JSON.stringify({ data: answer }));
     }
     catch (error) {
+        console.log(error)
         res.statusCode = 500;
         res.end(JSON.stringify({ error: 'Internal Server Error' }));
     }
