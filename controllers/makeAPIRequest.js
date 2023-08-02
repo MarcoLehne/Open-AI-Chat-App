@@ -13,7 +13,7 @@ module.exports = async(req,res) => {
         const prompt = req.body["input-field"];
         const model = req.body["model-selection"];
     
-        const response = await openai.createCompletion({ "model": model, "prompt": prompt, "max_tokens": 2048});
+        const response = await openai.createCompletion({ "model": model, "prompt": prompt, "max_tokens": 2048}, );
         const answer = response.data.choices[0].text.trim();
                 
         res.setHeader('Content-Type', 'application/json');
